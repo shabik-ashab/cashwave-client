@@ -40,6 +40,7 @@ const Signup = () => {
             password
           });
           localStorage.setItem("token", response.data.token)
+          localStorage.setItem("currentUser", firstName)
           navigate("/dashboard")
         }} label={"Sign up"} />
       </div>
