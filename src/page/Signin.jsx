@@ -11,6 +11,7 @@ const Signin = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleSignIn = async () => {
         try {
@@ -26,7 +27,7 @@ const Signin = () => {
             navigate('/dashboard');
         } catch (error) {
             console.error('Error signing in:', error);
-            // Handle sign-in failure, display error message to the user
+            setError('Invalid email or password. Please try again.'); // Set error message
         }
     };
 
@@ -49,6 +50,7 @@ const Signin = () => {
                         label={"Password"}
                         type="password"
                     />
+                    {error && <p className="text-red-500 text-sm mt-2">{error}</p>} {/* Render error message */}
                     <div className="pt-4">
                         <Button label={"Sign in"} onClick={handleSignIn} />
                     </div>
