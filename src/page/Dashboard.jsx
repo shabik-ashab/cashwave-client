@@ -18,13 +18,13 @@ const Dashboard = () => {
 
             try {
                 const response = await axios.get(
-                    'http://localhost:4000/api/v1/account/balance', 
+                    'http://localhost:8787/api/v1/account/balance', 
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     }
-                );
+                ); // Assuming the response contains balance data
                 setBalance(response.data.balance); // Assuming the response contains balance data
             } catch (error) {
                 console.error('Error fetching balance:', error);

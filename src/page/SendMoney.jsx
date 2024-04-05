@@ -12,7 +12,7 @@ const SendMoney = () => {
 
     const initiateTransfer = async () => {
         try {
-            const response = await axios.post("http://localhost:4000/api/v1/account/transfer", {
+            const response = await axios.post("http://localhost:8787/api/v1/account/transfer", {
                 to: id,
                 amount
             }, {
@@ -20,7 +20,7 @@ const SendMoney = () => {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
-            if (response.status === 200) {
+            if (response.data.statusCode === 200) {
                 setTransferStatus("success");
             } else {
                 setTransferStatus("error");
