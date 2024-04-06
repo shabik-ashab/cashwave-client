@@ -33,7 +33,7 @@ const Signup = () => {
       }} placeholder="123456" label={"Password"} />
       <div className="pt-4">
         <Button onClick={async () => {
-          const response = await axios.post("http://localhost:8787/api/v1/user/signup", {
+          const response = await axios.post("http://localhost:44549/api/v1/user/signup", {
             username,
             firstName,
             lastName,

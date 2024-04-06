@@ -18,7 +18,7 @@ const Dashboard = () => {
 
             try {
                 const response = await axios.get(
-                    'http://localhost:8787/api/v1/account/balance', 
+                    'http://localhost:44549/api/v1/account/balance', 
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
