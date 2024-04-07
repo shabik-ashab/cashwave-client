@@ -12,7 +12,7 @@ const SendMoney = () => {
 
     const initiateTransfer = async () => {
         try {
-            const response = await axios.post("http://localhost:44549/api/v1/account/transfer", {
+            const response = await axios.post("https://cashwave-cloudflare-hono.shabik-ashab2000.workers.dev/api/v1/account/transfer", {
                 to: id,
                 amount
             }, {
