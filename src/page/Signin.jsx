@@ -40,7 +40,7 @@ const Signin = () => {
                     <InputBox
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="harkirat@gmail.com"
+                        placeholder="example@example.com"
                         label={"Email"}
                     />
                     <InputBox
