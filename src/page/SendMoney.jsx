@@ -9,8 +9,12 @@ const SendMoney = () => {
     const name = searchParams.get("name");
     const [amount, setAmount] = useState(0);
     const [transferStatus, setTransferStatus] = useState(null);
+    const [isTransferring, setIsTransferring] = useState(false); // State to track if transfer is in progress
 
     const initiateTransfer = async () => {
+        if (isTransferring) return; // Prevent multiple transfer requests
+        setIsTransferring(true); // Set the state to indicate transfer initiation
+
         try {
             const response = await axios.post("https://cashwave-cloudflare-hono.shabik-ashab2000.workers.dev/api/v1/account/transfer", {
                 to: id,
@@ -28,6 +32,8 @@ const SendMoney = () => {
         } catch (error) {
             console.error("Error initiating transfer:", error);
             setTransferStatus("error");
+        } finally {
+            setIsTransferring(false); // Reset the state after the transfer request is completed
         }
     };
 
