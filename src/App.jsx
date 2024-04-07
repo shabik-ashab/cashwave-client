@@ -5,32 +5,21 @@ import Signup from "./page/Signup";
 import Dashboard from "./page/Dashboard";
 import SendMoney from "./page/SendMoney";
 
-// Custom PrivateRoute component to handle authentication
-const PrivateRoute = ({ element, path }) => {
-  const isLoggedIn = localStorage.getItem("token");
-  return isLoggedIn ? element : <Navigate to="/signin" replace />;
-};
-
 function App() {
+  const isLoggedIn = !!localStorage.getItem("token");
+
   return (
     <div>
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route
-            path="/dashboard"
-            element={<PrivateRoute element={<Dashboard />} />}
+            path="/"
+            element={isLoggedIn ? <Dashboard /> : <Navigate to="/signin" />}
           />
-          <Route
-            path="/send"
-            element={<PrivateRoute element={<SendMoney />} />}
-          />
-          {/* Redirect root to signin if not logged in */}
-          <Route
-            path="/*"
-            element={<Navigate to="/signin" replace />}
-          />
+          <Route path="/send" element={<SendMoney />} />
         </Routes>
       </BrowserRouter>
     </div>
