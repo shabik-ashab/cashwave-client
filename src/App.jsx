@@ -5,19 +5,13 @@ import Signup from "./page/Signup";
 import Dashboard from "./page/Dashboard";
 import SendMoney from "./page/SendMoney";
 
+// Custom PrivateRoute component to handle authentication
+const PrivateRoute = ({ element, path }) => {
+  const isLoggedIn = localStorage.getItem("token");
+  return isLoggedIn ? element : <Navigate to="/signin" replace />;
+};
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if user is logged in by checking if token exists in localStorage
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
-
   return (
     <div>
       <BrowserRouter>
@@ -26,15 +20,16 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route
             path="/dashboard"
-            element={isLoggedIn ? <Dashboard /> : <Navigate to="/signin" />}
+            element={<PrivateRoute element={<Dashboard />} />}
           />
-          <Route path="/send" element={<SendMoney />} />
-          {/* Default route */}
           <Route
-            path="/"
-            element={
-              isLoggedIn ? <Navigate to="/dashboard" /> : <Navigate to="/signin" />
-            }
+            path="/send"
+            element={<PrivateRoute element={<SendMoney />} />}
+          />
+          {/* Redirect root to signin if not logged in */}
+          <Route
+            path="/*"
+            element={<Navigate to="/signin" replace />}
           />
         </Routes>
       </BrowserRouter>
